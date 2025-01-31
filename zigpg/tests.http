@@ -1,0 +1,23 @@
+@base=http://localhost:3000
+ 
+### Create a new item
+ 
+POST {{base}}/users
+Content-Type: application/json
+ 
+{
+  "name":"Brad"
+}
+ 
+### Get All items
+ 
+GET {{base}}/users
+ 
+### Get Specific item
+ 
+GET {{base}}/users/2
+Content-Type: application/json
+ 
+### Delete item
+ 
+DELETE {{base}}/users/2

@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:17-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=abc123
+      - POSTGRES_USER=pg_user
+      - POSTGRES_DB=zap_db
