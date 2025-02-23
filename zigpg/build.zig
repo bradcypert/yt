@@ -22,13 +22,8 @@ pub fn build(b: *std.Build) void {
         .optimize = optimize,
     });
 
-    const zap = b.dependency("zap", .{
-        .target = target,
-        .optimize = optimize,
-        .openssl = false, // set to true to enable TLS support
-    });
-
-    exe.root_module.addImport("zap", zap.module("zap"));
+    const httpz_module = b.dependency("httpz", .{ .target = target, .optimize = optimize }).module("httpz");
+    exe.root_module.addImport("httpz", httpz_module);
 
     const pg = b.dependency("pg", .{
         .target = target,

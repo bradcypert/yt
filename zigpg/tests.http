@@ -6,7 +6,7 @@ POST {{base}}/users
 Content-Type: application/json
  
 {
-  "name":"Brad"
+  "name":"Matt"
 }
  
 ### Get All items
@@ -20,4 +20,4 @@ Content-Type: application/json
  
 ### Delete item
  
-DELETE {{base}}/users/2
+DELETE {{base}}/users/3

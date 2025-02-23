@@ -31,6 +31,10 @@
             .url = "git+https://github.com/karlseguin/pg.zig?ref=zig-0.13#bc31e767e56218e8c51f9b0e40c581219b0ac62a",
             .hash = "1220795dd7be5bb28a29b7cf1a46233b0c370c158d7f4183c35db27f2b7db9564358",
         },
+        .httpz = .{
+            .url = "git+https://github.com/karlseguin/http.zig?ref=zig-0.13#2a910af45a6a733adbcf9e5e56642c05f4f5c769",
+            .hash = "12203254adcaba63705ff7ecf1894a5a26d5a5a0a9cfecd01423775fa5566b625138",
+        },
     },
     .paths = .{
         "build.zig",
