@@ -1,0 +1,71 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/bradcypert/Projects/MarkdownToHtml/MarkdownToHtml.fsproj": {}
+  },
+  "projects": {
+    "/Users/bradcypert/Projects/MarkdownToHtml/MarkdownToHtml.fsproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/bradcypert/Projects/MarkdownToHtml/MarkdownToHtml.fsproj",
+        "projectName": "MarkdownToHtml",
+        "projectPath": "/Users/bradcypert/Projects/MarkdownToHtml/MarkdownToHtml.fsproj",
+        "packagesPath": "/Users/bradcypert/.nuget/packages/",
+        "outputPath": "/Users/bradcypert/Projects/MarkdownToHtml/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/bradcypert/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "/usr/local/share/dotnet/sdk/9.0.303/FSharp/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.300"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "FSharp.Core": {
+              "include": "Runtime, Compile, Build, Native, Analyzers, BuildTransitive",
+              "target": "Package",
+              "version": "[9.0.300, )",
+              "generatePathProperty": true
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.303/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
