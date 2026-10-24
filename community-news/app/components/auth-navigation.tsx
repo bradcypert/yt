@@ -7,6 +7,7 @@ export async function AuthNavigation() {
   return <nav aria-label="Main navigation"
     className="flex flex-wrap items-center gap-4 border-b p-4">
     <Link href="/">Community News</Link>
+    <Link href="/sources">Sources</Link>
     {!error && session?.user ? <>
       <span>Signed in as {session.user.name || 'Member'}</span>
       <form action={signOut}><button type="submit">Sign out</button></form>

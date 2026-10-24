@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm';
 import {
-  pgTable, uuid, text, boolean, timestamp, uniqueIndex, index, check
+  pgTable, uuid, text, boolean, timestamp, integer, uniqueIndex, index, check
 } from 'drizzle-orm/pg-core';
 
 export const sources = pgTable('sources', {
@@ -9,6 +9,13 @@ export const sources = pgTable('sources', {
   feedUrl: text('feed_url').notNull(),
   enabled: boolean('enabled').notNull().default(true),
   createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+  addedBy: text('added_by'),
+  etag: text('etag'),
+  lastModified: text('last_modified'),
+  lastCheckedAt: timestamp('last_checked_at', { withTimezone: true }),
+  lastSuccessAt: timestamp('last_success_at', { withTimezone: true }),
+  lastError: text('last_error'),
+  consecutiveFailures: integer('consecutive_failures').notNull().default(0),
 }, (t) => [uniqueIndex('sources_feed_url_unique').on(t.feedUrl)]);
 
 export const articles = pgTable('articles', {

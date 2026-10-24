@@ -1,12 +1,22 @@
-# Community News — Part 2
+# Community News — Part 3
 
-A shared news reader built with Next.js, Drizzle, and Neon Postgres. Part 1 is committed and tagged. Part 2 adds managed auth, signup/signin pages, session navigation, and shared article discussions. Sources and scheduled RSS ingestion arrive in Part 3.
+A shared news reader built with Next.js, Drizzle, and Neon Postgres. Part 1 is committed and tagged. Part 2 adds managed auth, signup/signin pages, session navigation, and shared article discussions. Part 3 adds source management and a scheduled RSS importer.
 
 Our backend is declared in neon.ts and deployed with neon deploy. Our Next.js app connects to that backend and runs on Vercel.
 
+## Part 3 setup
+
+Current branch: `community-news/part-3`, based on the committed/tagged Part 2. Sources are listed publicly at `/sources`; members can register a feed for import on the next scheduled run. Status shows last success or a generic failure with a consecutive failure count.
+
+Apply migrations with `npm run db:migrate`, then follow [RSS deployment and fixture instructions](docs/rss-rehearsal.md). Set `RSS_SCHEDULE_ENABLED=true` for the intended deployment and run `neon deploy --env .env.local`. The schedule is disabled by default until explicitly enabled. No deployment or migration application was performed here.
+
+This version matches the finished reference project's URL policy: HTTPS without embedded credentials, no publisher allowlist or custom-port restriction, and redirects rejected by the worker. No `RSS_ALLOWED_HOSTS` setting is used. This permits internal HTTPS requests and is not an SSRF defense.
+
+The Function checks up to 10 least-recently-checked enabled sources per tick, processes up to 100 items per feed, stores plain-text metadata, and uses `(source_id, external_key)` conflict handling to preserve existing articles and comments. It handles conditional requests and records per-source failures without stopping other feeds. Session advisory locks require a session-preserving database connection; confirm that before hosted use.
+
 ## Part 2 setup
 
-The current branch is `community-news/part-2`, based on the Part 1 commit. Auth and comments are implemented together on this branch. The local auth checkpoint was skipped at your request; managed-service behavior remains unverified.
+Part 2 is committed and tagged as `part-2`. Auth and comments were implemented together in that checkpoint. The local auth checkpoint was skipped at your request; managed-service behavior remains unverified.
 
 1. Run `npm ci`. In `.env.local`, keep `DATABASE_URL` for your intended demo Neon branch.
 2. Run `npm run backend:plan` and `npm run backend:deploy` to enable `auth: true` on that linked branch.
@@ -86,7 +96,7 @@ Exercise: add a source filter and explain why its query still executes on the se
 
 ## Git checkpoints
 
-See [the stacked PR workflow](docs/stacked-prs.md). Part 1 is committed. Part 2 is ready for review and a phase commit; runtime checks were skipped at your request. Keep RSS changes for Part 3.
+See [the stacked PR workflow](docs/stacked-prs.md). Part 1 is committed. Part 2 is committed. Part 3 is ready for review and a phase commit; runtime checks were skipped at your request.
 
 The installed Neon CLI is 8.0.2. Dependencies are pinned in package.json and package-lock.json. The workstation currently has Node 25; use Node 24 for recording and Functions runtime alignment.
 
@@ -111,4 +121,27 @@ To commit this phase from the `yt` repository root:
 git add community-news
 git commit -m "Add managed auth and shared article comments"
 git tag part-2
+```
+
+
+## Part 3 recording notes
+
+- 0:00: add a source and show an imported article.
+- 1:30: source-state migration, listing, and authenticated registration.
+- 5:00: explain the simplified HTTPS URL policy and its limits.
+- 9:00: bounded fetch, RSS/Atom parsing, and normalization.
+- 16:00: database duplicate identity and repeat imports.
+- 21:00: reusable pool, advisory locks, and trigger guard.
+- 26:00: declare the Function and schedule in `neon.ts`.
+- 30:00: fixture v1/v2, logs, and preserving existing comments.
+- 36:00: bad-feed isolation and the 15-minute production cadence.
+
+Exercise: record duration and inserted/skipped/error totals for each invocation, then explain why repeated imports preserve article identity.
+
+To commit Part 3 from the `yt` root:
+
+```sh
+git add community-news
+git commit -m "Add source management and scheduled RSS ingestion"
+git tag part-3
 ```
