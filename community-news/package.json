@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@neon/config": "1.8.3",
+    "@neondatabase/auth": "0.7.0-beta",
     "@neondatabase/serverless": "1.2.0",
     "@next/env": "16.3.8",
     "drizzle-orm": "0.45.3",
@@ -39,5 +40,8 @@
   },
   "engines": {
     "node": ">=24 <26"
+  },
+  "overrides": {
+    "zod": "$zod"
   }
 }
