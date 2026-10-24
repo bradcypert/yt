@@ -1,5 +1,6 @@
+import { sql } from 'drizzle-orm';
 import {
-  pgTable, uuid, text, boolean, timestamp, uniqueIndex, index
+  pgTable, uuid, text, boolean, timestamp, uniqueIndex, index, check
 } from 'drizzle-orm/pg-core';
 
 export const sources = pgTable('sources', {
@@ -22,4 +23,17 @@ export const articles = pgTable('articles', {
 }, (t) => [
   uniqueIndex('articles_source_external_unique').on(t.sourceId, t.externalKey),
   index('articles_recent_idx').on(t.ingestedAt, t.id),
+]);
+
+export const comments = pgTable('comments', {
+  id: uuid('id').defaultRandom().primaryKey(),
+  articleId: uuid('article_id').notNull()
+    .references(() => articles.id, { onDelete: 'cascade' }),
+  authorId: text('author_id').notNull(),
+  authorName: text('author_name').notNull(),
+  body: text('body').notNull(),
+  createdAt: timestamp('created_at', { withTimezone: true }).defaultNow().notNull(),
+}, (t) => [
+  index('comments_article_created_idx').on(t.articleId, t.createdAt, t.id),
+  check('comments_body_length', sql`char_length(btrim(${t.body})) between 1 and 2000`),
 ]);

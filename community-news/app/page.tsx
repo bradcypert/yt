@@ -15,6 +15,9 @@ export default async function Home() {
         <p>{article.sourceName} · {article.publishedAt
           ? <time dateTime={article.publishedAt.toISOString()}>{article.publishedAt.toISOString().slice(0, 10)}</time>
           : 'Publication date unavailable'}</p>
+        <Link className="underline" href={`/articles/${article.id}`}>
+          {article.commentCount} {article.commentCount === 1 ? 'comment' : 'comments'}
+        </Link>
         <p>{article.excerpt || 'No excerpt provided.'}</p>
       </li>
     )}</ul>

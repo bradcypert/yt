@@ -1,5 +1,5 @@
 import 'server-only';
-import { desc, eq } from 'drizzle-orm';
+import { desc, eq, sql } from 'drizzle-orm';
 import { db } from './db/client';
 import { articles, sources } from './db/schema';
 
@@ -7,6 +7,10 @@ export function listArticles() {
   return db.select({
     id: articles.id, title: articles.title, excerpt: articles.excerpt,
     sourceName: sources.name, publishedAt: articles.publishedAt,
+    commentCount: sql<number>`(
+      select count(*)::integer from comments c
+      where c.article_id = ${articles.id}
+    )`,
   }).from(articles)
     .innerJoin(sources, eq(articles.sourceId, sources.id))
     .orderBy(desc(articles.ingestedAt), desc(articles.id)).limit(30);

@@ -1,19 +1,18 @@
-# Part 1 checkpoint
+# Part 2 checkpoint
 
-Implemented from the complete tutorial handbook and the finished reference at `/home/brad/Projects/community-news/community-news`.
+Branch: `community-news/part-2`, based on Part 1 commit `0ddb72d` (tag `part-1`).
 
-Passed:
+Implemented:
 
-- Generated and inspected the initial sources/articles migration; no comments or fetch-state fields included.
-- TypeScript checking and ESLint.
-- Next.js 16.4.3 production build using a placeholder URL for compilation.
-- Production dependency audit: zero findings.
+- Managed Better Auth config, server SDK, proxy route, signup/signin/signout actions and forms, session navigation.
+- Separate comments migration with article foreign key, chronological index, and trimmed body length check.
+- Comment mutation that validates the session, article existence, UUID, and 1–2,000 character body. Author fields come exclusively from the session.
+- Shared discussion with escaped text, timestamps, empty state, and a labeled 100-comment cap.
+- Indexed comment counts in the existing article-list query and linked zero/singular/plural labels.
+- Environment placeholders and setup/recording instructions.
 
-Still requires your demo Neon configuration:
+The user explicitly skipped the intermediate local auth checkpoint and requested continuing with implementation. Live auth, database writes, migration application, two-browser behavior, and deployment remain unverified. No credentials were copied or remote services changed. No Part 2 commit or tag has been created.
 
-- Backend plan/deploy in the intended linked project/branch.
-- Apply migrations, seed twice, and verify rows/IDs remain stable.
-- List and detail reads; empty database and nonexistent/malformed article checks.
-- Vercel deployment against the same database branch.
+Auth SDK 0.7.0-beta is pinned. The Zod override uses the patched application version 4.6.7 instead of the SDK's older pin. Four moderate audit findings remain in Drizzle Kit's development dependency chain. npm reports peer warnings in the SDK's bundled auth UI dependencies; the application uses custom forms.
 
-No credentials were copied from the reference project. No remote services were changed. No implementation commits or episode tags were created. Review and commit Part 1 before advancing the Part 2 branch.
+Completed checks: generated and inspected the comments-only migration; typecheck, lint, and production build pass. Build used placeholder environment values and does not establish database or auth runtime behavior.
