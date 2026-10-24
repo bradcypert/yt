@@ -42,3 +42,5 @@ next-env.d.ts
 .neon
 
 !.env.example
+
+/fixtures/active-version

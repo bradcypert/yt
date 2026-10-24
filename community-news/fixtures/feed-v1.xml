@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"><channel>
+  <title>Community News Demo</title>
+  <link>https://example.com/</link>
+  <description>Controlled tutorial articles</description>
+  <item><guid isPermaLink="false">fixture-b</guid><title>Story B</title>
+    <link>https://example.com/b</link><description>Second demo story.</description></item>
+  <item><guid isPermaLink="false">fixture-a</guid><title>Story A</title>
+    <link>https://example.com/a</link><description>First demo story.</description></item>
+</channel></rss>
